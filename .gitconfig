@@ -1,0 +1,9 @@
+[user]
+	email = acouprie@hotmail.fr
+[credential]
+	helper = cache --timeout=31536000
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status

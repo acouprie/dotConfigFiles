@@ -120,10 +120,11 @@ set t_Co=256
 
 " Plugins {{{
 execute pathogen#infect()
+syntax on
 filetype plugin indent on " required by Pathogen Plugin Manager
+call pathogen#helptags()
 autocmd vimenter * NERDTree
 " Theme
-set background=light
 colorscheme monokai
 
 " CtrlP
@@ -170,6 +171,16 @@ let g:gitgutter_enabled = 1
 let g:gitgutter_eager = 0
 let g:gitgutter_sign_column_always = 1
 highlight clear SignColumn
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Searching the file system
 map <leader>' :NERDTreeToggle<cr>
