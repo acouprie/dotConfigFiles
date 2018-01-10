@@ -2,6 +2,7 @@
 " Switch syntax highlighting on, when the terminal has colors
 syntax on
 
+set mouse=a
 " Use vim, not vi api
 set nocompatible
 
@@ -123,7 +124,7 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on " required by Pathogen Plugin Manager
 call pathogen#helptags()
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 " Theme
 colorscheme monokai
 
@@ -140,9 +141,13 @@ let g:ctrlp_arg_map = 1
 " CtrlP -> files matched are ignored when expanding wildcards
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 
+if executable('ag')
+  let g:ackprg = 'ag --vimrep'
+endif
+
 " CtrlP -> use Ag for searching instead of VimScript
 " (might not work with ctrlp_show_hidden and ctrlp_custom_ignore)
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " CtrlP -> directories to ignore when fuzzy finding
 let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
