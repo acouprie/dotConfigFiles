@@ -24,7 +24,9 @@ plugins=(git docker docker-compose tmux vim-interaction)
 source $ZSH/oh-my-zsh.sh
 
 # Personal aliases
-alias vi="vim"
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
 alias r="source ~/.zshrc"
 alias tat='tmux new-session -As $(basename "$PWD" | tr . -)' # will attach if session exists, or create a new session
 alias tmuxsrc="tmux source-file ~/.tmux.conf"

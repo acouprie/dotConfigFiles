@@ -89,6 +89,10 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# switch screen
+bindsym $mod+a move workspace to output left
+bindsym $mod+b move workspace to output right
+
 # switch to workspace
 bindsym $mod+ampersand workspace 1
 bindsym $mod+eacute workspace 2
