@@ -127,6 +127,9 @@ call pathogen#helptags()
 "autocmd vimenter * NERDTree
 " Theme
 colorscheme monokai
+if &diff
+  colorscheme monokai
+endif
 
 " CtrlP
 map <leader>t <C-p>
@@ -218,6 +221,25 @@ sunmap e
 " e.g.
 " to map something in just NORMAL mode use :nmap or :nnoremap
 " to map something in just VISUAL mode use :vmap or :vnoremap
+"
+" Tab navigation like Firefox.
+nnoremap <C-S-tab> :tabprevious<CR>
+nnoremap <C-tab>   :tabnext<CR>
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+inoremap <C-tab>   <Esc>:tabnext<CR>i
+inoremap <C-t>     <Esc>:tabnew<CR>
+nnoremap <C-w> :tabclose<CR>
+" nnoremap <C-&> 1gt
+" nnoremap <C-é> 2gt
+" nnoremap <C-"> 3gt
+" nnoremap <C-'> 4gt
+" nnoremap <C-(> 5gt
+" nnoremap <C--> 6gt
+" nnoremap <C-è> 7gt
+" nnoremap <C-_> 8gt
+" nnoremap <C-ç> 9gt
+" nnoremap <C-à> 10gt
 
 " Clear search buffer
 :nnoremap § :nohlsearch<cr>

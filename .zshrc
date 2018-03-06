@@ -24,6 +24,7 @@ plugins=(git docker docker-compose tmux vim-interaction)
 source $ZSH/oh-my-zsh.sh
 
 # Personal aliases
+alias r="rubocop"
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"

@@ -7,3 +7,5 @@
 	br = branch
 	ci = commit
 	st = status
+[merge]
+  tool="vimdiff"
