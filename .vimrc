@@ -78,6 +78,8 @@ set guioptions-=T
 
 " UTF encoding
 set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-boom,utf-8,latin1
 
 " Autoload files that have changed outside of vim
 set autoread
@@ -147,6 +149,9 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
 if executable('ag')
   let g:ackprg = 'ag --vimrep'
 endif
+
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
 
 " CtrlP -> use Ag for searching instead of VimScript
 " (might not work with ctrlp_show_hidden and ctrlp_custom_ignore)

@@ -14,21 +14,23 @@ export ZSH=/home/antoine/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="gnzh"
+#ZSH_THEME="random"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose tmux vim-interaction)
+plugins=(git docker docker-compose tmux vim-interaction zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
 # Personal aliases
+alias upgrade="sudo apt update && sudo apt upgrade --yes"
 alias r="rubocop"
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias r="source ~/.zshrc"
+alias cat="bat"
 alias tat='tmux new-session -As $(basename "$PWD" | tr . -)' # will attach if session exists, or create a new session
 alias tmuxsrc="tmux source-file ~/.tmux.conf"
 alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
@@ -38,11 +40,15 @@ alias doco="docker-compose up"
 alias cp="cp -rv"
 alias g="git"
 alias gqa="git checkout qa"
-alias shotgun="docker-compose run --rm -p 4000:3000 web bundle exec shotgun -o 0.0.0.0"
+alias greset="git reset --soft HEAD~1 && git reset HEAD"
+alias eve="cd ~/workspace/wef-event-services"
+alias auth="cd ~/workspace/wef-authentication-services"
+alias rune="docker-compose run --rm -p 4000:3000 web bundle exec shotgun -o 0.0.0.0"
+alias runa="docker-compose run --rm -p 40000:3000 dev bundle exec shotgun -o 0.0.0.0"
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-source $HOME/.zshenv
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
+#source $HOME/.zshenv
 
 # ------------------------------------------------------------
 
@@ -260,3 +266,4 @@ RPS1='$(git_prompt_string)'
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+neofetch
