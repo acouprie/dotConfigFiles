@@ -7,7 +7,7 @@ export MANPAGER="less -X" # Don’t clear the screen after quitting a manual pag
 export EDITOR="vim"
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
-export ZSH=/home/antoine/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
  #}}}
 
 # Set name of the theme to load. Optionally, if you set this to "random"
