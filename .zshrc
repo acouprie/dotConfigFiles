@@ -1,5 +1,4 @@
 # Exports {{{
-export GITHUB_USER="acouprie@hotmail.fr"
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin # Reorder PATH so local bin is first
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
@@ -13,8 +12,9 @@ export ZSH=~/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="gnzh"
+#ZSH_THEME="gnzh"
 #ZSH_THEME="random"
+ZSH_THEME="sonicradish"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -28,9 +28,6 @@ source $ZSH/oh-my-zsh.sh
 alias upgrade="sudo apt update && sudo apt upgrade --yes"
 alias r="rubocop"
 alias v="nvim"
-alias vi="nvim"
-alias vim="nvim"
-alias cat="bat"
 alias tat='tmux new-session -As $(basename "$PWD" | tr . -)' # will attach if session exists, or create a new session
 alias tmuxsrc="tmux source-file ~/.tmux.conf"
 alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
@@ -41,10 +38,6 @@ alias cp="cp -rv"
 alias g="git"
 alias gqa="git checkout qa"
 alias greset="git reset --soft HEAD~1 && git reset HEAD"
-alias eve="cd ~/workspace/wef-event-services"
-alias auth="cd ~/workspace/wef-authentication-services"
-alias rune="docker-compose run --rm -p 4000:3000 web bundle exec shotgun -o 0.0.0.0"
-alias runa="docker-compose run --rm -p 40000:3000 dev bundle exec shotgun -o 0.0.0.0"
 
 #export PATH="$HOME/.rbenv/bin:$PATH"
 #eval "$(rbenv init -)"
