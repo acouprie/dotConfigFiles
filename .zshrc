@@ -105,6 +105,13 @@ bindkey "\e[3~" delete-char
 bindkey '^R' history-incremental-search-backward
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
+
+# fzf and greenclip shortcut
+fzf-clipboard() {
+  echo -n "$(greenclip print | fzf -e -i)" | xclip -selection clipboard
+}
+zle -N fzfclip fzf-clipboard
+bindkey '^@' fzfclip
 # }}}
 
 # Colours {{{
