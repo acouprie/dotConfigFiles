@@ -1,269 +1,104 @@
-# Exports {{{
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin # Reorder PATH so local bin is first
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;32'
-export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
-export EDITOR="vim"
-export CLICOLOR=1
-export LSCOLORS=Gxfxcxdxbxegedabagacad
-export ZSH=~/.oh-my-zsh
- #}}}
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
+# Path to your oh-my-zsh installation.
+export ZSH=/home/$(whoami)/.oh-my-zsh
+export EDITOR='nvim'
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="gnzh"
-#ZSH_THEME="random"
-ZSH_THEME="sonicradish"
+ZSH_THEME="robbyrussell"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose tmux vim-interaction zsh-syntax-highlighting)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# Personal aliases
-alias upgrade="sudo apt update && sudo apt upgrade --yes"
-alias r="rubocop"
-alias v="nvim"
-alias tat='tmux new-session -As $(basename "$PWD" | tr . -)' # will attach if session exists, or create a new session
-alias tmuxsrc="tmux source-file ~/.tmux.conf"
-alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}" # tmux kill all sessions
-alias ct="ctags -R --exclude=.git --exclude=node_modules"
-alias dotfiles="ls -a | grep '^\.' | grep --invert-match '\.DS_Store\|\.$'"
-alias doco="docker-compose up"
-alias cp="cp -rv"
-alias g="git"
-alias gqa="git checkout qa"
-alias greset="git reset --soft HEAD~1 && git reset HEAD"
+# User configuration
 
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
-#source $HOME/.zshenv
+# export MANPATH="/usr/local/man:$MANPATH"
 
-# ------------------------------------------------------------
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-# Auto Completion {{{
-autoload -U compinit && compinit
-zmodload -i zsh/complist
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-# man zshcontrib
-zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-zstyle ':vcs_info:*' enable git #svn cvs
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-# Enable completion caching, use rehash to clear
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
-
-# Fallback to built in ls colors
-zstyle ':completion:*' list-colors ''
-
-# Make the list prompt friendly
-zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
-
-# Make the selection prompt friendly when there are a lot of choices
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-
-# Add simple colors to kill
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-
-# list of completers to use
-zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' menu select=1 _complete _ignored _approximate
-
-# offer indexes before parameters in subscripts
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-
-# formatting and messages
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
-zstyle ':completion:*' group-name ''
-
-# ignore completion functions (until the _ignored completer)
-zstyle ':completion:*:functions' ignored-patterns '_*'
-zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
-zstyle '*' single-ignored show
-# }}}
-
-# Key Bindings {{{
-# Make the delete key (or Fn + Delete on the Mac) work instead of outputting a ~
-bindkey '^?' backward-delete-char
-bindkey "^[[3~" delete-char
-bindkey "^[3;5~" delete-char
-bindkey "\e[3~" delete-char
-
-# Make the `beginning/end` of line and `bck-i-search` commands work within tmux
-bindkey '^R' history-incremental-search-backward
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
-
-# fzf and greenclip shortcut
-fzf-clipboard() {
-  echo -n "$(greenclip print | fzf -e -i)" | xclip -selection clipboard
-}
-zle -N fzfclip fzf-clipboard
-bindkey '^@' fzfclip
-# }}}
-
-# Colours {{{
-autoload colors; colors
-
-# The variables are wrapped in \%\{\%\}. This should be the case for every
-# variable that does not contain space.
-for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
-  eval PR_$COLOR='%{$fg_no_bold[${(L)COLOR}]%}'
-  eval PR_BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
-done
-
-eval RESET='$reset_color'
-export PR_RED PR_GREEN PR_YELLOW PR_BLUE PR_WHITE PR_BLACK
-export PR_BOLD_RED PR_BOLD_GREEN PR_BOLD_YELLOW PR_BOLD_BLUE
-export PR_BOLD_WHITE PR_BOLD_BLACK
-
-# Clear LSCOLORS
-unset LSCOLORS
-# }}}
-
-# Set Options {{{
-# ===== Basics
-setopt no_beep # don't beep on error
-setopt interactive_comments # Allow comments even in interactive shells (especially for Muness)
-
-# ===== Changing Directories
-setopt auto_cd # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
-setopt cdablevarS # if argument to cd is the name of a parameter whose value is a valid directory, it will become the current directory
-setopt pushd_ignore_dups # don't push multiple copies of the same directory onto the directory stack
-
-# ===== Expansion and Globbing
-setopt extended_glob # treat #, ~, and ^ as part of patterns for filename generation
-
-# ===== History
-setopt append_history # Allow multiple terminal sessions to all append to one zsh command history
-setopt extended_history # save timestamp of command and duration
-setopt inc_append_history # Add comamnds as they are typed, don't wait until shell exit
-setopt hist_expire_dups_first # when trimming history, lose oldest duplicates first
-setopt hist_ignore_dups # Do not write events to history that are duplicates of previous events
-setopt hist_ignore_space # remove command line from history list when first character on the line is a space
-setopt hist_find_no_dups # When searching history don't display results already cycled through twice
-setopt hist_reduce_blanks # Remove extra blanks from each command line being added to history
-setopt hist_verify # don't execute, just expand history
-setopt share_history # imports new commands and appends typed commands to history
-
-# ===== Completion
-setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word
-setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
-setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
-setopt complete_in_word # Allow completion from within a word/phrase
-
-unsetopt menu_complete # do not autoselect the first completion entry
-
-# ===== Correction
-setopt correct # spelling correction for commands
-setopt correctall # spelling correction for arguments
-
-# ===== Prompt
-setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
-setopt transient_rprompt # only show the rprompt on the current prompt
-
-# ===== Scripts and Functions
-setopt multios # perform implicit tees or cats when multiple redirections are attempted
-# }}}
-
-# Prompt {{{
-function virtualenv_info {
-  [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
-}
-
-function prompt_char {
-  git branch >/dev/null 2>/dev/null && echo '±' && return
-  hg root >/dev/null 2>/dev/null && echo '☿' && return
-  echo '○'
-}
-
-function box_name {
-  [ -f ~/.box-name ] && cat ~/.box-name || hostname -s
-}
-
-# ------------------------------------------------------------
-
-# Adapted from code found at <https://gist.github.com/1712320>.
-
-setopt prompt_subst
-autoload -U colors && colors # Enable colors in prompt
-
-# Modify the colors and symbols in these variables as desired.
-GIT_PROMPT_SYMBOL="%{$fg[blue]%}±"
-GIT_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
-GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
-GIT_PROMPT_AHEAD="%{$fg[red]%}ANUM%{$reset_color%}"
-GIT_PROMPT_BEHIND="%{$fg[cyan]%}BNUM%{$reset_color%}"
-GIT_PROMPT_MERGING="%{$fg[magenta]%}⚡︎%{$reset_color%}"
-GIT_PROMPT_UNTRACKED="%{$fg[red]%}●%{$reset_color%}"
-GIT_PROMPT_MODIFIED="%{$fg[yellow]%}●%{$reset_color%}"
-GIT_PROMPT_STAGED="%{$fg[green]%}●%{$reset_color%}"
-
-# Show Git branch/tag, or name-rev if on detached head
-parse_git_branch() {
-  (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
-}
-
-# Show different symbols as appropriate for various Git repository states
-parse_git_state() {
-
-  # Compose this value via multiple conditional appends.
-  local GIT_STATE=""
-
-  local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
-  if [ "$NUM_AHEAD" -gt 0 ]; then
-    GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD}
-  fi
-
-  local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
-  if [ "$NUM_BEHIND" -gt 0 ]; then
-    GIT_STATE=$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND}
-  fi
-
-  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
-  if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_MERGING
-  fi
-
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_UNTRACKED
-  fi
-
-  if ! git diff --quiet 2> /dev/null; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_MODIFIED
-  fi
-
-  if ! git diff --cached --quiet 2> /dev/null; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED
-  fi
-
-  if [[ -n $GIT_STATE ]]; then
-    echo "$GIT_PROMPT_PREFIX$GIT_STATE$GIT_PROMPT_SUFFIX"
-  fi
-
-}
-
-# If inside a Git repository, print its branch and state
-git_prompt_string() {
-  local git_where="$(parse_git_branch)"
-  [ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
-}
-
-# Set the right-hand prompt
-RPS1='$(git_prompt_string)'
-
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-neofetch
+export PATH=/home/ether/workspace/anaconda3/bin:/home/ether/workspace/anaconda3/condabin:/home/ether/.rbenv/shims:/home/ether/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/ether/workspace/graph/gurobi901/linux64/bin:/opt/arm-tools/arm-none-eabi/bin:/home/ether/.fzf/bin:/home/ether/workspace/heroku/bin
+export PATH=/home/ether/.pyenv/versions/3.7.2/bin:$PATH
